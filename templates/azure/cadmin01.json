@@ -1,0 +1,111 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "defaultValue": "cadmin01",
+            "type": "String"
+        },
+        "ip": {
+            "defaultValue": "10.110.1.156",
+            "type": "String"
+        },
+        "size": {
+            "defaultValue": "Standard_DS1_v2",
+            "type": "String"
+        },
+        "disktype": {
+            "defaultValue": "Standard_LRS",
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('name'),'pri')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "[concat(parameters('name'),'priip')]",
+                        "properties": {
+                            "privateIPAddress": "[parameters('ip')]",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cclustername-vnet', 'pri')]"
+                            },
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'private')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('size')]"
+                },
+                "storageProfile": {
+		    "imageReference": {
+                        "id": "/subscriptions/32cfa85b-6a08-4b31-9a21-69e06b6ad5a5/resourceGroups/alces-images/providers/Microsoft.Compute/images/CENTOS7-OPENFLIGHT-2020.1-1803202029_azure-8G"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('name'),'OSdisk')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "DiskSizeGB": 32,
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('disktype')]"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[concat(parameters('name'),'.cloud1.pri.clustername.alces.network')]",
+                    "adminUsername": "alces",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/alces/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa REPLACEME"
+                                }
+                            ]
+                        },
+                        "provisionVMAgent": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]",
+                            "properties": {
+                                "primary": false
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

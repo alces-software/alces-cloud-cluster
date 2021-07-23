@@ -1,0 +1,7 @@
+#!/bin/bash
+rg=cclustername
+
+for vm in {01..10} ; do
+    echo "Tagging cgpu$vm"
+    az vm update -g $rg -n cgpu$vm -o none --set tags.type=compute
+done

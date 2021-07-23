@@ -1,0 +1,11 @@
+#!/bin/bash
+node=$1
+
+if [ -z $node ]; then
+  echo "Node name plz" >&2
+  exit 1
+fi
+
+rg=cclustername
+
+az vm deallocate -g $rg -n $node

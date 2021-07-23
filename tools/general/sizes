@@ -1,0 +1,5 @@
+#!/bin/bash
+location=$1
+
+
+az vm list-sizes --location $location -o table
