@@ -9,6 +9,8 @@ BASEREPO="$REPOURL/os/x86_64"
 UPDATESREPO="$REPOURL/updates/x86_64"
 EXTRASREPO="$REPOURL/extras/x86_64"
 
+yum install -y createrepo yum-utils
+
 mkdir /opt/flight/deployment/repo/
 
 cat << EOF > /opt/flight/deployment/repo/mirror.conf
