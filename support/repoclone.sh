@@ -75,6 +75,12 @@ name=OpenFlight - Base
 baseurl=https://repo.openflighthpc.org/openflight/centos/\$releasever/\$basearch/
 enabled=1
 gpgcheck=0
+
+[openflight-dev]
+name=OpenFlight - Dev
+baseurl=https://repo.openflighthpc.org/openflight-dev/centos/\$releasever/\$basearch/
+enabled=1
+gpgcheck=0
 EOF
 
 cat << EOF > /opt/flight/deployment/repo/cluster.repo
@@ -127,11 +133,18 @@ baseurl=http://$IP/deployment/repo/openflight
 enabled=1
 gpgcheck=0
 priortiy=4
+
+[openflight-dev]
+name=OpenFlight - Dev
+baseurl=http://$IP/deployment/repo/openflight-dev
+enabled=1
+gpgcheck=0
+priortiy=4
 EOF
 
 cd /opt/flight/deployment/repo/
 
-for i in centos-7-updates centos-7-extras epel-7 alcesflight openflight ; do 
+for i in centos-7-updates centos-7-extras epel-7 alcesflight openflight openflight-dev; do 
     reposync -nm --config mirror.conf -r $i -p $i --norepopath
     createrepo $i
 done
