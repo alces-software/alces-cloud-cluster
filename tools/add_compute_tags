@@ -1,5 +1,5 @@
 #!/bin/bash
-rg=clustername
+rg=cclustername
 
 for vm in {01..10} ; do
     echo "Tagging cgpu$vm"

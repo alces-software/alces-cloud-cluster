@@ -15,7 +15,7 @@
                             "privateIPAddress": "10.110.1.11",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'clustername-vnet', 'pri')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cclustername-vnet', 'pri')]"
                             },
                             "privateIPAddressVersion": "IPv4"
                         }

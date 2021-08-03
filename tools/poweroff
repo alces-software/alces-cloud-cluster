@@ -6,6 +6,6 @@ if [ -z $node ]; then
   exit 1
 fi
 
-rg=clustername
+rg=cclustername
 
 az vm deallocate -g $rg -n $node

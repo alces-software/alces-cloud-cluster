@@ -1,2 +1,2 @@
-rg=clustername
+rg=cclustername
 az vm list -g $rg -o table -d
