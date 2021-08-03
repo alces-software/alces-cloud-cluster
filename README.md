@@ -20,7 +20,6 @@ WIP repository of scripts & templates for deploying a cloud cluster
       sed -i 's/CLUSTERNAME/MYCLUSTER/g' $file
   done
   ```
-- _Note: The cloud templates presume that `clustername` is preceeded by `c` for cloud resources (e.g. cmycluster-vnet)_
 - Set the `keyData` in the templates to the desired SSH public key (e.g. public key for cgw1)
   ```
   for file in $(grep -Rl 'ssh-rsa REPLACEME' files scripts templates tools) ; do

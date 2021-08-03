@@ -33,7 +33,7 @@
                             "privateIPAddress": "[parameters('ip')]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cclustername-vnet', 'pri')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'clustername-vnet', 'pri')]"
                             },
                             "privateIPAddressVersion": "IPv4"
                         }
