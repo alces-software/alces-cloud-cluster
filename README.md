@@ -12,7 +12,7 @@ WIP repository of scripts & templates for deploying a cloud cluster
   ```
   git clone https://github.com/alces-software/alces-cloud-cluster /opt/flight/deployment
   ```
-- Update `clustername` and `CLUSTERNAME` in all files & scripts
+- Update `clustername` and `CLUSTERNAME` in all files & scripts (do not prepend `clustername` with a `c`)
   ```
   cd /opt/flight/deployment
   for file in $(grep -Ril clustername files scripts templates tools) ; do
