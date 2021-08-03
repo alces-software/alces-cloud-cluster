@@ -24,7 +24,7 @@ WIP repository of scripts & templates for deploying a cloud cluster
 - Set the `keyData` in the templates to the desired SSH public key (e.g. public key for cgw1)
   ```
   for file in $(grep -Rl 'ssh-rsa REPLACEME' files scripts templates tools) ; do
-      sed -i 's/ssh-rsa REPLACEME/ssh-rsa MyPublicSSHkeyHere user@host/g' $file
+      sed -i 's,ssh-rsa REPLACEME,ssh-rsa MyPublicSSHkeyHere user@host,g' $file
   done
   ```
 - Set the `IPAPASS` in the scripts 
