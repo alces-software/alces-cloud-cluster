@@ -15,7 +15,7 @@
                             "privateIPAddress": "10.110.1.11",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cclustername-vnet', 'pri')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cluster', 'cluster-pri1')]"
                             },
                             "privateIPAddressVersion": "IPv4"
                         }
@@ -27,7 +27,7 @@
                 "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'private')]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'cluster-private')]"
                 }
             }
         },
