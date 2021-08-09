@@ -8,6 +8,9 @@
             "apiVersion": "2020-05-01",
             "name": "cluster-route",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "disableBgpRoutePropagation": true,
                 "routes": [
@@ -43,6 +46,9 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Network/routeTables', 'cluster-route')]"
             ],
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -146,6 +152,9 @@
             "apiVersion": "2020-05-01",
             "name": "cluster-dmz",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "securityRules": [
                     {
@@ -207,6 +216,9 @@
             "apiVersion": "2020-05-01",
             "name": "cluster-private",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "securityRules": []
             }

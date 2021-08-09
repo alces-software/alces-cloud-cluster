@@ -7,6 +7,9 @@
             "apiVersion": "2020-05-01",
             "name": "cgw1pri",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "ipConfigurations": [
                     {
@@ -36,6 +39,9 @@
             "name": "cgw1pubIP",
             "apiVersion": "2017-03-01",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 30
@@ -49,6 +55,9 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', 'cgw1pubIP')]"
             ],
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "ipConfigurations": [
                     {
@@ -85,6 +94,9 @@
                 "[resourceId('Microsoft.Network/networkInterfaces', 'cgw1pri')]",
                 "[resourceId('Microsoft.Network/networkInterfaces', 'cgw1dmz')]"
             ],
+            "tags": {
+                "type": "core"
+            },
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "Standard_DS1_v2"
