@@ -34,6 +34,9 @@ curl http://10.110.1.200/deployment/files/slurm.conf > /opt/flight/opt/slurm/etc
 curl http://10.110.1.200/deployment/files/slurmdbd.conf > /opt/flight/opt/slurm/etc/slurmdbd.conf
 curl http://10.110.1.200/deployment/files/gres.conf > /opt/flight/opt/slurm/etc/gres.conf
 
+chmod 600 /opt/flight/opt/slurm/etc/slurmdbd.conf
+chown nobody /opt/flight/opt/slurm/etc/slurmdbd.conf
+
 systemctl enable flight-slurmdbd
 systemctl start flight-slurmdbd
 
