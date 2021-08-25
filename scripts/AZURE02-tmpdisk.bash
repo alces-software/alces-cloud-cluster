@@ -13,4 +13,4 @@ umount /dev/disk/cloud/azure_resource-part1
 
 # Apply changes
 systemctl restart waagent
-chmod 777 /tmp # Must be done after mount
+chmod 1777 /tmp # Must be done after mount
