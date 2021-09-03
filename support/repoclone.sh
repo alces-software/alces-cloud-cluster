@@ -137,7 +137,7 @@ priortiy=4
 [openflight-dev]
 name=OpenFlight - Dev
 baseurl=http://$IP/deployment/repo/openflight-dev
-enabled=1
+enabled=0
 gpgcheck=0
 priortiy=4
 EOF
