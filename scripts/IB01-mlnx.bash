@@ -46,3 +46,8 @@ NETMASK=255.255.0.0
 ZONE=trusted
 LINKDELAY=60
 EOF
+
+# Prevent WALinuxAgent from taking over RDMA IPs when on Azure
+if [ -f /etc/waagent.conf ] ; then
+    sed -i 's/OS.EnableRDMA=.*/OS.EnableRDMA=n/g' /etc/waagent.conf
+fi
