@@ -15,5 +15,10 @@ umount /dev/disk/cloud/azure_resource-part1
 systemctl restart waagent
 chmod 1777 /tmp # Must be done after mount
 
-echo "chmod 1777 /tmp" >> /etc/rc.d/rc.local
+cat << EOF >> /etc/rc.d/rc.local
+while ! grep -q '^/dev/sdb1 /tmp ' /proc/mounts; do
+  sleep 5
+done
+chmod 1777 /tmp
+EOF
 chmod +x /etc/rc.d/rc.local
