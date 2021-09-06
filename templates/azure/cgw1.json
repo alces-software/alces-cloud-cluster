@@ -113,7 +113,7 @@
                         "name": "cgw1OSdisk",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
-                        "DiskSizeGB": 32,
+                        "DiskSizeGB": 48,
                         "managedDisk": {
                             "storageAccountType": "Premium_LRS"
                         }
