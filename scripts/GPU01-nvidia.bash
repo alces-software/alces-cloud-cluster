@@ -11,4 +11,5 @@ yum -y groupinstall "Development Tools"
 sh /opt/service/alces/files/nvidia.run -a -q -s
 
 # Ensure /dev/nvidia* are created at boot
-echo "nvidia-smi" >> /etc/rc.local
+echo "nvidia-smi" >> /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
