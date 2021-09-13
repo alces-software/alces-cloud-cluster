@@ -9,6 +9,7 @@
             "name": "cluster-route",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {
@@ -47,6 +48,7 @@
                 "[resourceId('Microsoft.Network/routeTables', 'cluster-route')]"
             ],
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {
@@ -153,6 +155,7 @@
             "name": "cluster-dmz",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {
@@ -217,6 +220,7 @@
             "name": "cluster-private",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {

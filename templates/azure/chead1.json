@@ -8,6 +8,7 @@
             "name": "chead1pri",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {
@@ -43,6 +44,7 @@
                 "[resourceId('Microsoft.Network/networkInterfaces', 'chead1pri')]"
             ],
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {

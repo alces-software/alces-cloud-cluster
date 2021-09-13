@@ -26,7 +26,8 @@
             "name": "[concat(parameters('name'),'pri')]",
             "location": "[resourceGroup().location]",
             "tags": {
-                "type": "core",
+                "project": "cclustername",
+                "type": "core"
             },
             "properties": {
                 "ipConfigurations": [
@@ -61,7 +62,8 @@
                 "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]"
             ],
             "tags": {
-                "type": "core",
+                "project": "cclustername",
+                "type": "core"
             },
             "properties": {
                 "hardwareProfile": {

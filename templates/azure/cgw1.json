@@ -8,6 +8,7 @@
             "name": "cgw1pri",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {
@@ -40,6 +41,7 @@
             "apiVersion": "2017-03-01",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "core"
             },
             "properties": {

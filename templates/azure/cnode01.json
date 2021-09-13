@@ -26,6 +26,7 @@
             "name": "[concat(parameters('name'),'pri')]",
             "location": "[resourceGroup().location]",
             "tags": {
+                "project": "cclustername",
                 "type": "compute",
                 "compute_group": "default"
             },
@@ -62,6 +63,7 @@
                 "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]"
             ],
             "tags": {
+                "project": "cclustername",
                 "type": "compute",
                 "compute_group": "default"
             },
