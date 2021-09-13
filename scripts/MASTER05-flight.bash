@@ -30,6 +30,7 @@ export HOME=/root
 /opt/flight/bin/flight set always on
 
 # Set Flight always on globally
+mkdir -p /etc/xdg/flight/
 cat << EOF > /etc/xdg/flight/settings.rc
 ################################################################################
 ##
