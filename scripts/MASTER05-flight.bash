@@ -29,3 +29,13 @@ export HOME=/root
 #mv /etc/profile.d/flightcenter.sh /etc/profile.d/flightcenter.sh.old
 /opt/flight/bin/flight set always on
 
+# Set Flight always on globally
+cat << EOF > /etc/xdg/flight/settings.rc
+################################################################################
+##
+## Alces Flight - Shell configuration file
+## Copyright (c) 2019 Alces Flight Ltd
+##
+################################################################################
+flight_STARTER_always=enabled
+EOF
