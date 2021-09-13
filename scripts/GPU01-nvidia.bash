@@ -13,3 +13,14 @@ sh /opt/service/alces/files/nvidia.run -a -q -s
 # Ensure /dev/nvidia* are created at boot
 echo "nvidia-smi" >> /etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
+
+# A100 GPU Fabric Manager
+## Place the following file under `/opt/service/alces/files/` as `fabricmanager.tar.gz`
+## wget -O /opt/service/alces/files/fabricmanager.tar.gz https://developer.download.nvidia.com/compute/cuda/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-470.57.02.tar.gz 
+#cd /tmp
+#tar xf /opt/service/alces/files/fabricmanager.tar.gz
+#cd fabricmanager
+#./fm_run_package_installer.sh
+#systemctl enable nvidia-fabricmanager
+#systemctl start nvidia-fabricmanager
+
