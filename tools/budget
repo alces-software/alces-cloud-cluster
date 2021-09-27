@@ -8,6 +8,9 @@ today="$(date +'%Y-%m-%d')"
 
 budget="UNKNOWN"
 
+# Install extension
+az extension add --name costmanagement
+
 if [ -z $subscription ] ; then
     echo "Set subscription name in script!"
     exit 1
