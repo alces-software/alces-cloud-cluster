@@ -1,0 +1,35 @@
+#!/bin/bash
+
+rg=cclustername
+subscription=''
+
+start_date='' # e.g. 2021-09-01
+today="$(date +'%Y-%m-%d')"
+
+budget="UNKNOWN"
+
+if [ -z $subscription ] ; then
+    echo "Set subscription name in script!"
+    exit 1
+fi
+
+if [ -z $start_date ] ; then
+    echo "Set start date in script!"
+    exit 1
+fi
+
+costs="$(az costmanagement query --type "ActualCost" --scope "subscriptions/${subscription}" --timeframe "Custom" --time-period from=${start_date}T00:00:00 to=${today}T00:00:00 --dataset-aggregation "{\"totalCost\":{\"name\":\"PreTaxCost\",\"function\":\"Sum\"}}" --output yaml)"
+sum="$(echo "$costs" |grep '\- \- ' |sed 's/- - //g' |tr '\n' '+' |sed 's/+$//g')"
+total="$(echo "$sum" |bc)"
+
+if [[ $budget != "UNKNOWN" ]] ; then
+    remaining="$(echo "$budget-$total" |bc)"
+else
+    remaining="UNKNOWN"
+fi
+
+cat << EOF
+Cost to Date $start_date: £$total
+Total Budget: £$budget
+Remaining: £$remaining
+EOF
