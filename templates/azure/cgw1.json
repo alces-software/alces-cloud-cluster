@@ -1,6 +1,14 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ssh-key": {
+            "type": "string",
+            "metadata": {
+                "description": "SSH key to access gateway with"
+            }
+        }
+    },
     "resources": [
         {
             "type": "Microsoft.Network/networkInterfaces",
@@ -131,7 +139,7 @@
                             "publicKeys": [
                                 {
                                     "path": "/home/alces/.ssh/authorized_keys",
-                                    "keyData": "ssh-rsa REPLACEME"
+                                    "keyData": "[parameters('ssh-key')]"
                                 }
                             ]
                         },
