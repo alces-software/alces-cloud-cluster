@@ -29,6 +29,17 @@ EOF
 systemctl enable httpd
 systemctl start httpd
 
+systemctl disable NetworkManager
+systemctl mask NetworkManager
+systemctl stop NetworkManager
+
+touch /etc/cloud/cloud-init.disabled
+
+systemctl disable cloud-init
+systemctl disable cloud-config
+systemctl disable cloud-final
+systemctl disable cloud-init-local
+
 # Install Azure CLI
 ## rpm --import https://packages.microsoft.com/keys/microsoft.asc
 ## cat << EOF > /etc/yum.repos.d/azure-cli.repo
