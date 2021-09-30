@@ -35,3 +35,9 @@ WIP repository of scripts & templates for deploying a cloud cluster
   ```
 - Set a munge key in `files/munge.key`
 - Setup repo mirrors in `repo`
+
+## Flight Setup
+
+The scripts `MASTER00-flight-setup.bash` and `SLAVE00-flight-setup.bash` add a systemd service which runs _before_ SLURM is allowed to start to prewarm the node. 
+
+This exists to address issues with Azure `/tmp` disk mounting and Nvidia device loading. 

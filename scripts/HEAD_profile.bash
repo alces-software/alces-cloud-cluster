@@ -1,4 +1,5 @@
 curl http://10.110.1.200/deployment/scripts/ALL01-site.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
+curl http://10.110.1.200/deployment/scripts/MASTER00-flight-setup.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/AZURE01-base.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/ALL02-pdsh.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/MASTER01-base.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
