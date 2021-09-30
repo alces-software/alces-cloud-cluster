@@ -1,5 +1,6 @@
 curl http://10.110.1.200/deployment/scripts/ALL01-site.bash  | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/AZURE01-base.bash  | /bin/bash -x | tee -a /tmp/mainscript-default-output
+rm -f /etc/flightcentersupported # Set node to unsupported
 curl http://10.110.1.200/deployment/scripts/AZURE02-tmpdisk.bash  | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/SLAVE01-base.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/SLAVE99-nfs.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
