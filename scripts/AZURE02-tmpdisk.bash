@@ -15,9 +15,17 @@ umount /dev/disk/cloud/azure_resource-part1
 systemctl restart waagent
 chmod 1777 /tmp # Must be done after mount
 
-cat << EOF > /var/lib/flight-setup/scripts/01-tmpdisk.bash
+cat << 'EOF' > /var/lib/flight-setup/scripts/01-tmpdisk.bash
+MAX=12 # ~1 minute of waiting for mount
+COUNT=1
 while ! grep -q '^/dev/sdb1 /tmp ' /proc/mounts; do
-  sleep 5
+    echo "Temp disk mount check loop #$COUNT"
+    sleep 5
+    if [ $COUNT -eq $MAX ] ; then 
+        scontrol update NodeName=$(hostname -s) State=DRAIN Reason="Temp disk failed to mount"
+        break
+    fi 
+    COUNT=$((COUNT + 1))
 done
 chmod 1777 /tmp
 EOF
