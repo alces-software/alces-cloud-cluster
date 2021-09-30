@@ -1,5 +1,14 @@
 yum -y update 
 
+sed -i 's/SELINUX=.*/SELINUX=disabled' /etc/selinux/config
+setenforce 0
+
+
+echo 'ZONE="Europe/London"' > /etc/sysconfig/clock
+ln -snf /usr/share/zoneinfo/Europe/London /etc/localtime
+yum -y install ntpdate
+
+
 cat << "EOF" > /etc/profile.d/flightcenter.sh
 #Custom PS1 with client name
 [ -f /etc/flightcentersupported ] && c=32 || c=31
@@ -39,6 +48,16 @@ systemctl disable cloud-init
 systemctl disable cloud-config
 systemctl disable cloud-final
 systemctl disable cloud-init-local
+
+
+firewall-cmd --add-interface eth0 --zone public --permanent
+firewall-cmd --add-port 2005/tcp --zone public --permanent
+firewall-cmd --add-masquerade --zone public --permanent
+
+firewall-cmd --add-interface eth1 --zone trusted --permanent
+firewall-cmd --add-interface tun0 --zone trusted --permanent
+
+fireall-cmd --reload
 
 # Install Azure CLI
 ## rpm --import https://packages.microsoft.com/keys/microsoft.asc
