@@ -3,7 +3,7 @@
 # Use this script to clone repositories
 #
 
-IP=10.10.254.1
+IP=10.110.1.200
 REPOURL="https://mirror.bytemark.co.uk/centos/7"
 BASEREPO="$REPOURL/os/x86_64"
 UPDATESREPO="$REPOURL/updates/x86_64"
