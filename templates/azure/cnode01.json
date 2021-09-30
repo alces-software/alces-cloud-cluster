@@ -116,6 +116,24 @@
                     ]
                 }
             }
+        },
+        {
+            "name": "[concat(parameters('name'),'/startupscript')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines/', parameters('name'))]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "protectedSettings": {
+                    "commandToExecute": "curl http://10.110.1.200/deployment/scripts/COMPUTE_profile.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output"
+                }
+            }
         }
     ]
 }
