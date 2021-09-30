@@ -40,5 +40,7 @@ chown nobody /opt/flight/opt/slurm/etc/slurmdbd.conf
 systemctl enable flight-slurmdbd
 systemctl start flight-slurmdbd
 
+sleep 10
+
 systemctl enable flight-slurmctld
 systemctl restart flight-slurmctld
