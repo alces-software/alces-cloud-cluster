@@ -8,7 +8,7 @@ while [ ! -f /tmp/fcops_adopted ] ; do
     echo "FCOPs salt completion check loop #$COUNT"
     sleep 5
     if [ $COUNT -eq $MAX ] ; then
-        scontrol update NodeName=$(hostname -s) State=DRAIN Reason="Ops configuration not complete"
+        /opt/flight/opt/slurm/bin/scontrol update NodeName=$(hostname -s) State=DRAIN Reason="Ops configuration not complete"
         break
     fi
     COUNT=$((COUNT + 1))
