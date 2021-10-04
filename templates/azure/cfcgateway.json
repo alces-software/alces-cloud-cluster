@@ -1,0 +1,119 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "defaultValue": "cfcgateway",
+            "type": "String"
+        },
+        "ip": {
+            "defaultValue": "10.110.1.202",
+            "type": "String"
+        },
+        "size": {
+            "defaultValue": "Standard_DS1_v2",
+            "type": "String"
+        },
+        "disktype": {
+            "defaultValue": "Standard_LRS",
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('name'),'pri')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "project": "cclustername",
+                "type": "core"
+            },
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "[concat(parameters('name'),'priip')]",
+                        "properties": {
+                            "privateIPAddress": "[parameters('ip')]",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'cluster', 'cluster-pri1')]"
+                            },
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'cluster-private')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]"
+            ],
+            "tags": {
+                "project": "cclustername",
+                "type": "core"
+            },
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('size')]"
+                },
+                "storageProfile": {
+		    "imageReference": {
+                        "id": "/subscriptions/SUBSCRIPTION_ID/resourceGroups/cclustername/providers/Microsoft.Compute/images/CENTOS7-ALCES-2021.2-0209211140_azure"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('name'),'OSdisk')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "DiskSizeGB": 32,
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('disktype')]"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[concat(parameters('name'),'.cloud1.pri.clustername.alces.network')]",
+                    "adminUsername": "alces",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/alces/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa REPLACEME"
+                                }
+                            ]
+                        },
+                        "provisionVMAgent": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('name'),'pri'))]",
+                            "properties": {
+                                "primary": false
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
