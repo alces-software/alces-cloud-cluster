@@ -1,7 +1,7 @@
 # Requires on-site VPN to be setup
 curl http://10.110.1.202/resources/salt/salt_minion.sh | bash
 
-cat << EOF > /var/lib/flight-setup/scripts/03-fcops.bash
+cat << 'EOF' > /var/lib/flight-setup/scripts/03-fcops.bash
 MAX=24 # ~2 minute of waiting for mount
 COUNT=1
 while [ ! -f /tmp/fcops_adopted ] ; do
