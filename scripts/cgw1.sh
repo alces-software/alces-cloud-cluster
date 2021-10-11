@@ -1,8 +1,5 @@
 yum -y update 
 
-sed -i 's/SELINUX=.*/SELINUX=disabled' /etc/selinux/config
-setenforce 0
-
 
 echo 'ZONE="Europe/London"' > /etc/sysconfig/clock
 ln -snf /usr/share/zoneinfo/Europe/London /etc/localtime
