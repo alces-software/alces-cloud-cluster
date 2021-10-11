@@ -9,3 +9,4 @@ curl http://10.110.1.200/deployment/scripts/MASTER05-flight.bash | /bin/bash -x 
 curl http://10.110.1.200/deployment/scripts/HPC01-base.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/HPC02-pkgs.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/SLAVE90-ipa.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
+curl http://10.110.1.200/deployment/scripts/ALL03-fcops.bash |/bin/bash -x | tee -a /tmp/mainscript-default-output

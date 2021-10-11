@@ -10,3 +10,4 @@ curl http://10.110.1.200/deployment/scripts/HPC02-pkgs.bash | /bin/bash -x | tee
 curl http://10.110.1.200/deployment/scripts/SLAVE90-ipa.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/SLAVE10-slurm.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
 curl http://10.110.1.200/deployment/scripts/SLAVE11-flight.bash | /bin/bash -x | tee -a /tmp/mainscript-default-output
+curl http://10.110.1.200/deployment/scripts/ALL03-fcops.bash |/bin/bash -x | tee -a /tmp/mainscript-default-output
