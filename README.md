@@ -20,7 +20,7 @@ WIP repository of scripts & templates for deploying a cloud cluster
 
 ## Repo Setup
 
-This details the steps taken by the repo setup script. These steps can be performed manually instead of with the setup script if desired.
+This details the steps taken by the `support/setup_files.sh` script. These steps can be performed manually instead of with the setup script if desired.
 
 - Update `clustername` and `CLUSTERNAME` in all files & scripts (do not prepend `clustername` with a `c`)
   ```
