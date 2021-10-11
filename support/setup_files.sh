@@ -38,7 +38,7 @@ for file in $(grep -Rl 'IPAPASS' scripts) ; do
     sed -i "s/IPAPASS/$IPAPASS/g" $file
 done
 
-tr -dc A-Za-z0-9 </dev/urandom | head -c 256 ; echo '' > files/munge.key
+echo "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 256 ; echo '')" > files/munge.key
 
 cd -
 echo "Done."
