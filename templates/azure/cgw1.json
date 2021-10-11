@@ -7,6 +7,12 @@
             "metadata": {
                 "description": "SSH key to access gateway with"
             }
+        },
+        "image-path": {
+            "type": "string",
+            "metadata":  {
+                "description": "Image resource path"
+            }
         }
     },
     "resources": [
@@ -113,7 +119,7 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "id": "IMAGE_PATH"
+                        "id": "[parameters('image-path')]"
                     },
                     "osDisk": {
                         "osType": "Linux",
