@@ -71,7 +71,7 @@
                 },
                 "storageProfile": {
 		    "imageReference": {
-                        "id": "/subscriptions/SUBSCRIPTION_ID/resourceGroups/cclustername/providers/Microsoft.Compute/images/CENTOS7-ALCES-2021.2-0209211140_azure"
+                        "id": "IMAGE_PATH"
                     },
                     "osDisk": {
                         "osType": "Linux",

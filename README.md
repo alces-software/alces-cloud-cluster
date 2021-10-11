@@ -21,6 +21,12 @@ WIP repository of scripts & templates for deploying a cloud cluster
   done
   ```
 - _Note: The cloud templates presume that `clustername` is preceeded by `c` for cloud resources (e.g. cmycluster-vnet)_
+- Set the image resource path to the location of the image in the destination cloud account
+  ```
+  for file in $(grep -Ril IMAGE_PATH templates) ; do
+      sed -i 's,IMAGE_PATH,/subscriptions/SUBSCRIPTION_ID/resourceGroups/cclustername/providers/Microsoft.Compute/images/CENTOS7-ALCES-VERSION_azure,g' $file
+  done
+  ```
 - Set the `keyData` in the templates to the desired SSH public key (e.g. public key for cgw1)
   ```
   for file in $(grep -Rl 'ssh-rsa REPLACEME' files scripts templates tools) ; do

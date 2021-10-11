@@ -113,10 +113,7 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "publisher": "OpenLogic",
-                        "offer": "CentOS",
-                        "sku": "7_8",
-                        "version": "latest"
+                        "id": "IMAGE_PATH"
                     },
                     "osDisk": {
                         "osType": "Linux",

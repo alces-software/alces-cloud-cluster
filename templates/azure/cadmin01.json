@@ -71,7 +71,7 @@
                 },
                 "storageProfile": {
 		    "imageReference": {
-                        "id": "/subscriptions/32cfa85b-6a08-4b31-9a21-69e06b6ad5a5/resourceGroups/alces-images/providers/Microsoft.Compute/images/CENTOS7-OPENFLIGHT-2020.1-1803202029_azure-8G"
+                        "id": "IMAGE_PATH"
                     },
                     "osDisk": {
                         "osType": "Linux",
