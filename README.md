@@ -12,6 +12,16 @@ WIP repository of scripts & templates for deploying a cloud cluster
   ```
   git clone https://github.com/alces-software/alces-cloud-cluster /opt/flight/deployment
   ```
+- Set the variables at the top of `support/setup_files.sh`
+- Run the setup script
+  ```
+  bash support/setup_files.sh
+  ```
+
+## Repo Setup
+
+This details the steps taken by the repo setup script. These steps can be performed manually instead of with the setup script if desired.
+
 - Update `clustername` and `CLUSTERNAME` in all files & scripts (do not prepend `clustername` with a `c`)
   ```
   cd /opt/flight/deployment
