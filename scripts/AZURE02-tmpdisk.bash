@@ -11,10 +11,6 @@ sed -i "s,ResourceDisk.SwapSizeMB=.*,ResourceDisk.SwapSizeMB=$SWAPSIZEMB,g" /etc
 sed -i '/^\/dev\/disk\/cloud\/azure_resource-part1.*/d' /etc/fstab
 umount /dev/disk/cloud/azure_resource-part1
 
-# Apply changes
-systemctl restart waagent
-chmod 1777 /tmp # Must be done after mount
-
 cat << 'EOF' > /var/lib/flight-setup/scripts/01-tmpdisk.bash
 MAX=12 # ~1 minute of waiting for mount
 COUNT=1
