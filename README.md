@@ -50,6 +50,7 @@ This details the steps taken by the `support/setup_files.sh` script. These steps
   done
   ```
 - Set a munge key in `files/munge.key`
+- Setup `files/slurm.conf` and `files/gres.conf`
 - Setup repo mirrors in `repo`
 
 ## Flight Setup
