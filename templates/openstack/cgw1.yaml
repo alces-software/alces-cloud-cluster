@@ -1,0 +1,66 @@
+heat_template_version: 2018-03-02
+parameters:
+  ssh-key:
+    type: string
+    label: "SSH Key"
+    description: "SSH key to access gateway with"
+  image-id:
+    type: string
+    label: "Image ID"
+    description: "OpenStack image ID for gateway node"
+
+resources:
+  cgw1pri:
+    type: OS::Neutron::Port
+    properties:
+      name: cgw1pri
+      network: cluster
+      security_groups:
+        - cluster-pri-sg
+      fixed_ips:
+        - subnet: cluster-pri1
+          ip_address: 10.110.1.200
+
+  cgw1pubIP:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external
+
+  cgw1dmz:
+    type: OS::Neutron::Port
+    properties:
+      name: cgw1dmz
+      network: cluster
+      security_groups:
+        - cluster-dmz-sg
+      fixed_ips:
+        - subnet: cluster-dmz
+          ip_address: 10.110.0.200
+
+  cgw1pubIPassoc:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: cgw1pubIP }
+      port_id: { get_resource: cgw1dmz }
+
+  cgw1cloudinit:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - name: stu
+            ssh-authorized-keys:
+              - { get_param: ssh-key }
+
+  cgw1:
+    type: OS::Nova::Server
+    properties:
+      name: cgw1
+      flavor: m1.small
+      image: { get_param: image-id }
+      admin_user: alces
+      networks:
+        - port: { get_resource: cgw1dmz }
+        - port: { get_resource: cgw1pri }
+      user_data_format: RAW
+      user_data: { get_resource: cgw1cloudinit }
