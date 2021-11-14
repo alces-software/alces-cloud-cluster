@@ -5,7 +5,7 @@
 - Login to `chead1` and run the base script
 
 ```shell
-curl http://10.110.1.200/deployment/scripts/HEAD_BASE_profile.bash
+curl http://10.110.1.200/deployment/scripts/base/BASE_HEAD_profile.bash
 ```
 
 ## Infra
@@ -13,7 +13,7 @@ curl http://10.110.1.200/deployment/scripts/HEAD_BASE_profile.bash
 - Login to `cinfra01` and run the base script
 
 ```shell
-curl http://10.110.1.200/deployment/scripts/INFRA_BASE_profile.bash
+curl http://10.110.1.200/deployment/scripts/base/BASE_INFRA_profile.bash
 ```
 
 ## Compute
@@ -21,13 +21,13 @@ curl http://10.110.1.200/deployment/scripts/INFRA_BASE_profile.bash
 - Login to `cnode01` and run the base script (repeat for each additional node)
 
 ```shell
-curl http://10.110.1.200/deployment/scripts/COMPUTE_BASE_profile.bash
+curl http://10.110.1.200/deployment/scripts/base/BASE_COMPUTE_profile.bash
 ```
 
 ## Admin
 
-- Login to `cadmin0` and run the base script
+- Login to `cadmin01` and run the base script
 
 ```shell
-curl http://10.110.1.200/deployment/scripts/ADMIN_BASE_profile.bash
+curl http://10.110.1.200/deployment/scripts/base/BASE_ADMIN_profile.bash
 ```
