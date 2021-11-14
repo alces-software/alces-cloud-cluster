@@ -11,6 +11,7 @@ yum -y groupinstall "Development Tools"
 sh /opt/service/alces/files/nvidia.run -a -q -s
 
 # Ensure /dev/nvidia* are created at boot
+mkdir -p /var/lib/flight-setup/scripts/
 echo "nvidia-smi" > /var/lib/flight-setup/scripts/02-nvidia.bash
 
 # A100 GPU Fabric Manager
