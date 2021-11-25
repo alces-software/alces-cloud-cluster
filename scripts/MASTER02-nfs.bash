@@ -1,5 +1,5 @@
-DISK=/dev/nvme1n1
-PART=${DISK}p1
+DISK=/dev/disk/azure/scsi1/lun0 # Azure specific
+PART=${DISK}-part1 # Azure specific
 
 if [ -b $DISK ]; then
   parted $DISK --script mklabel gpt

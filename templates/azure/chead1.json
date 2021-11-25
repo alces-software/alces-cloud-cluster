@@ -65,7 +65,14 @@
                             "storageAccountType": "Premium_LRS"
                         }
                     },
-                    "dataDisks": []
+                    "dataDisks": [
+                        {
+                        "name": "export",
+                        "diskSizeGB": "512",
+                        "lun": "0",
+                        "createOption": "empty"
+                        }
+                    ]
                 },
                 "osProfile": {
                     "computerName": "chead1.cloud1.pri.clustername.alces.network",
