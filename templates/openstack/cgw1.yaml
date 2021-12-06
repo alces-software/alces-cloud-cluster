@@ -1,5 +1,9 @@
 heat_template_version: 2018-03-02
 parameters:
+  ext-network:
+    type: string
+    label: External Network Name
+    description: The name of the external network to bridge network to
   ssh-key:
     type: string
     label: "SSH Key"
@@ -24,7 +28,7 @@ resources:
   cgw1pubIP:
     type: OS::Neutron::FloatingIP
     properties:
-      floating_network: external
+      floating_network: { get_param: ext-network }
 
   cgw1dmz:
     type: OS::Neutron::Port
