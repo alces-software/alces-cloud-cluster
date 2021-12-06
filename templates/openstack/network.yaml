@@ -1,4 +1,9 @@
 heat_template_version: 2018-03-02
+parameters:
+  ext-network:
+    type: string
+    label: External Network Name
+    description: The name of the external network to bridge network to
 resources:
   cluster-ext-route:
     type: OS::Neutron::Router
@@ -6,7 +11,7 @@ resources:
     properties:
       name: cluster-ext-route
       external_gateway_info:
-        network: external
+        network: { get_param: ext-network }
 
   cluster-ext-route-iface:
     type: OS::Neutron::RouterInterface

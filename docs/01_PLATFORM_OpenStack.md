@@ -20,7 +20,9 @@
 
 - Create network from remote template 
     ```shell
-    openstack stack create -t https://raw.githubusercontent.com/alces-software/alces-cloud-cluster/main/templates/openstack/network.yaml cluster-network --wait
+    openstack stack create -t https://raw.githubusercontent.com/alces-software/alces-cloud-cluster/main/templates/openstack/network.yaml \
+                           --parameter ext-network='external' \
+                           cluster-network --wait
     ```
 
 ## Gateway VM Deployment
