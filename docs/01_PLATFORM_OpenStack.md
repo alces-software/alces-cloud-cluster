@@ -29,7 +29,7 @@
 
 - Deploy gateway VM
     ```shell
-    openstack create -t https://raw.githubusercontent.com/alces-software/alces-cloud-cluster/main/templates/openstack/cgw1.yaml \ 
+    openstack stack create -t https://raw.githubusercontent.com/alces-software/alces-cloud-cluster/main/templates/openstack/cgw1.yaml \ 
                      --parameter ext-network='external' \
                      --parameter ssh-key='ssh-rsa MySSHkey' \
                      --parameter image-id='CENTOS7-ALCES-2021.3-0410211632_generic-cloudinit' \
