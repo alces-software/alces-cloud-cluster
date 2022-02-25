@@ -52,7 +52,7 @@ resources:
     properties:
       cloud_config:
         users:
-          - name: stu
+          - name: flight
             ssh-authorized-keys:
               - { get_param: ssh-key }
 
@@ -60,7 +60,7 @@ resources:
     type: OS::Nova::Server
     properties:
       name: cgw1
-      flavor: m1.small
+      flavor: small
       image: { get_param: image-id }
       admin_user: alces
       networks:
@@ -68,3 +68,14 @@ resources:
         - port: { get_resource: cgw1pri }
       user_data_format: RAW
       user_data: { get_resource: cgw1cloudinit }
+
+  cgw1disk:
+    type: OS::Cinder::Volume
+    properties:
+      size: 16
+
+  cgw1diskattach:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_resource: cgw1disk }
+      instance_uuid: { get_resource: cgw1 }
