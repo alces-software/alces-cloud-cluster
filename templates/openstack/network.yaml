@@ -69,3 +69,9 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: cluster-pri-sg
+      rules:
+        - direction: ingress
+          port_range_min: 0
+          port_range_max: 65535
+          protocol: tcp
+          remote_ip_prefix: 10.110.1.0/24
