@@ -38,7 +38,11 @@ resources:
       name: cluster-pri1
       network: { get_resource: cluster }
       cidr: "10.110.1.0/24"
+      gateway_ip: null
       ip_version: 4
+      host_routes: 
+        - destination: 10.110.0.0/24
+          nexthop: 10.110.1.200
 
   cluster-dmz-sg:
     type: OS::Neutron::SecurityGroup
