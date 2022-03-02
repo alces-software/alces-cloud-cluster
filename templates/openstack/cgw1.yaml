@@ -68,11 +68,15 @@ resources:
         - port: { get_resource: cgw1pri }
       user_data_format: RAW
       user_data: { get_resource: cgw1cloudinit }
+      metadata:
+        type: core
 
   cgw1disk:
     type: OS::Cinder::Volume
     properties:
       size: 16
+      metadata:
+        type: core
 
   cgw1diskattach:
     type: OS::Cinder::VolumeAttachment
