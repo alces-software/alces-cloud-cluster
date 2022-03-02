@@ -38,11 +38,8 @@ resources:
       name: cluster-pri1
       network: { get_resource: cluster }
       cidr: "10.110.1.0/24"
-      gateway_ip: null
+      gateway_ip: 10.110.1.200
       ip_version: 4
-      host_routes: 
-        - destination: 10.110.0.0/24
-          nexthop: 10.110.1.200
 
   cluster-dmz-sg:
     type: OS::Neutron::SecurityGroup
@@ -71,7 +68,7 @@ resources:
       name: cluster-pri-sg
       rules:
         - direction: ingress
-          port_range_min: 0
-          port_range_max: 65535
+          port_range_min: 1
+          port_range_max: 65534
           protocol: tcp
           remote_ip_prefix: 10.110.1.0/24
