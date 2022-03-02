@@ -1,0 +1,60 @@
+heat_template_version: 2018-03-02
+parameters:
+  ssh-key:
+    type: string
+    label: "SSH Key"
+    description: "SSH key to access gateway with"
+  image-id:
+    type: string
+    label: "Image ID"
+    description: "OpenStack image ID for gateway node"
+
+resources:
+  cnode01pri:
+    type: OS::Neutron::Port
+    properties:
+      name: cnode01pri
+      network: cluster
+      security_groups:
+        - cluster-pri-sg
+      fixed_ips:
+        - subnet: cluster-pri1
+          ip_address: 10.110.1.101
+
+  cnode01cloudinit:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - name: flight
+            ssh-authorized-keys:
+              - { get_param: ssh-key }
+
+  cnode01:
+    type: OS::Nova::Server
+    properties:
+      name: cnode01
+      flavor: small
+      image: { get_param: image-id }
+      admin_user: alces
+      networks:
+        - port: { get_resource: cnode01pri }
+      user_data_format: RAW
+      user_data: { get_resource: cnode01cloudinit }
+      metadata:
+        type: compute
+        compute_group: default
+
+  cnode01disk:
+    type: OS::Cinder::Volume
+    properties:
+      size: 16
+      metadata:
+        type: core
+        compute_group: default
+
+  cnode01diskattach:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_resource: cnode01disk }
+      instance_uuid: { get_resource: cnode01 }

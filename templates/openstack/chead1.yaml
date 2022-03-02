@@ -1,0 +1,58 @@
+heat_template_version: 2018-03-02
+parameters:
+  ssh-key:
+    type: string
+    label: "SSH Key"
+    description: "SSH key to access gateway with"
+  image-id:
+    type: string
+    label: "Image ID"
+    description: "OpenStack image ID for gateway node"
+
+resources:
+  chead1pri:
+    type: OS::Neutron::Port
+    properties:
+      name: chead1pri
+      network: cluster
+      security_groups:
+        - cluster-pri-sg
+      fixed_ips:
+        - subnet: cluster-pri1
+          ip_address: 10.110.1.11
+
+  chead1cloudinit:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - name: flight
+            ssh-authorized-keys:
+              - { get_param: ssh-key }
+
+  chead1:
+    type: OS::Nova::Server
+    properties:
+      name: chead1
+      flavor: small
+      image: { get_param: image-id }
+      admin_user: alces
+      networks:
+        - port: { get_resource: chead1pri }
+      user_data_format: RAW
+      user_data: { get_resource: chead1cloudinit }
+      metadata:
+        type: core
+
+  chead1disk:
+    type: OS::Cinder::Volume
+    properties:
+      size: 16
+      metadata:
+        type: core
+
+  chead1diskattach:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_resource: chead1disk }
+      instance_uuid: { get_resource: chead1 }
